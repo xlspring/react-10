@@ -1,0 +1,12 @@
+.logoWrapper {
+  margin: 5px;
+  padding: 0;
+  display: block;
+}
+.logoWrapper .img {
+  vertical-align: middle;
+  height: 75px;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=index.module.css.map */

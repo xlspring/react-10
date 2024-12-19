@@ -1,0 +1,13 @@
+.catContainer {
+  max-width: 100%;
+  padding: 20px;
+}
+.catContainer:nth-child(2n) {
+  background: lightgray;
+  border-radius: 5px;
+}
+.catContainer img {
+  max-height: 500px;
+}
+
+/*# sourceMappingURL=index.css.map */

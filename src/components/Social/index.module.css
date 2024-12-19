@@ -1,0 +1,9 @@
+.social {
+  margin: 10px 0px;
+  transition: 0.2s all ease-in-out;
+}
+.social:hover {
+  scale: 200%;
+}
+
+/*# sourceMappingURL=index.module.css.map */
