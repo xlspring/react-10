@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-
   workflow_dispatch:
 
 jobs:
@@ -24,18 +23,28 @@ jobs:
           npm install -g newman-reporter-htmlextra
 
       - name: Make Dir for results
-        run: mkdir -p test-results
+        run: |
+          mkdir -p test-results
+          ls -la
 
       - name: Run Postman Collection
         env:
           COLLECTION_ID: ${{secrets.COLLECTION_ID}}
           POSTMAN_KEY: ${{secrets.POSTMAN_KEY}}
         run: |
-          newman run https://api.postman.com/collections/${{env.COLLECTION_ID}}?access_key=${{env.POSTMAN_KEY}} \
-            --reporter-htmlextra-export ${{ github.workspace }}/test-results/report.html
+          set -e
+          newman run "https://api.postman.com/collections/${{secrets.COLLECTION_ID}}?access_key=${{secrets.POSTMAN_KEY}}" \
+            --reporter-htmlextra \
+            --reporter-htmlextra-export "./test-results/report.html"
 
+      - name: Verify report exists
+        run: |
+          ls -la test-results/
+          
       - name: Upload the results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-artifact
-          path: ${{ github.workspace }}/test-results/report.html
+          path: test-results
+          if-no-files-found: error
