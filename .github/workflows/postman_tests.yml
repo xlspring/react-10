@@ -29,7 +29,7 @@ jobs:
       - name: Run Postman Collection
         env:
           COLLECTION_ID: ${{secrets.COLLECTION_ID}}
-          POSTMAN_KEY: ${{secrets.POSTMAN_API}}
+          POSTMAN_KEY: ${{secrets.POSTMAN_KEY}}
         run: |
           newman run https://api.postman.com/collections/${{env.COLLECTION_ID}}?access_key=${{env.POSTMAN_KEY}}
 
