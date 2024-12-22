@@ -31,7 +31,7 @@ jobs:
           COLLECTION_ID: ${{secrets.COLLECTION_ID}}
           POSTMAN_KEY: ${{secrets.POSTMAN_API}}
         run: |
-          newman run https://api.postman.com/collections/$COLLECTION_ID?access_key=$POSTMAN_KEY
+          newman run https://api.postman.com/collections/${{env.COLLECTION_ID}}?access_key=${{env.POSTMAN_KEY}}
 
       - name: Output the results
         uses: actions/upload-artifact@v4
