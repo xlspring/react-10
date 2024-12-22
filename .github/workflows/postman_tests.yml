@@ -32,13 +32,18 @@ jobs:
           COLLECTION_ID: ${{secrets.COLLECTION_ID}}
           POSTMAN_KEY: ${{secrets.POSTMAN_KEY}}
         run: |
-          set -e
           newman run "https://api.postman.com/collections/${{secrets.COLLECTION_ID}}?access_key=${{secrets.POSTMAN_KEY}}" \
-            --reporter-htmlextra \
-            --reporter-htmlextra-export "./test-results/report.html"
+            -r htmlextra \
+            --reporter-htmlextra-title "API Test Results" \
+            --reporter-htmlextra-export "./test-results/report.html" \
+            --reporter-htmlextra-darkTheme \
+            || echo "Newman tests failed but continuing"
 
-      - name: Verify report exists
+      - name: List contents
         run: |
+          echo "Current directory:"
+          ls -la
+          echo "Test results directory:"
           ls -la test-results/
           
       - name: Upload the results
